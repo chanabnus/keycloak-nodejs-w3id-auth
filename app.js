@@ -107,8 +107,16 @@ app.get('/login', (req, res, next) => {
         console.log(`${new Date().toISOString()} [KEYCLOAK] Login Handler starts..`);
         next();
     },
-    passport.authenticate('samlStrategy')
-    // ,(req, res) => {
+    passport.authenticate('samlStrategy'),
+    (req, res) => {
+
+        //SSO response payload
+        console.log(`${new Date().toISOString()} [KEYCLOAK] SSO login callback response payload: ${req.user.attributes}`);
+        res.send(req.user.attributes);
+    }
+);
+
+// ,(req, res) => {
     //     // SSO response payload
     //     const sso_payload = req.user.attributes;
         
@@ -121,8 +129,6 @@ app.get('/login', (req, res, next) => {
     //         // user: req.user.attributes
     //     })
     // }
-);
-
 
 
 // post login callback route
