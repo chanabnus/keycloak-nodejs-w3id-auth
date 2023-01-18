@@ -110,11 +110,16 @@ app.get('/login', (req, res, next) => {
 
 // home route
 app.get('/home', (req, res, next) => {
-        console.log(`${new Date().toISOString()} [KEYCLOAK HOME] Home Handler starts.. ${req.user}`);
-        res.send(req.user);
+        console.log(`${new Date().toISOString()} [KEYCLOAK HOME] Home Handler starts..`);
         next();
     },
-    passport.authenticate('samlStrategy')
+    passport.authenticate('samlStrategy'),
+    (req, res) => {
+
+        //SSO response payload
+        console.log(`${new Date().toISOString()} [KEYCLOAK] SSO login callback response payload: ${req.user.attributes}`);
+        res.send(req.user.attributes);
+    }
 );
 
 // post login callback route
