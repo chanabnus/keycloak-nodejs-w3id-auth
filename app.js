@@ -110,8 +110,8 @@ app.get('/login', (req, res, next) => {
 
 // home route
 app.get('/home', (req, res, next) => {
-        console.log(`${new Date().toISOString()} [KEYCLOAK HOME] Home Handler starts.. ${req.user.attributes}`);
-        res.send(req.user.attributes);
+        console.log(`${new Date().toISOString()} [KEYCLOAK HOME] Home Handler starts.. ${req.user}`);
+        res.send(req.user);
         next();
     },
     passport.authenticate('samlStrategy')
