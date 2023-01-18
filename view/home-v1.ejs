@@ -19,5 +19,24 @@
       </p>
     </div>
 
+    <div>
+      <h3>Login Details:</h3>
+      <%
+        try {
+          if (user) {
+        %>
+            <p>Welcome <b><%= user.name %></b></p>
+            <p>Your email is: <b><%= user.email %></b> </p>
+            <p>Your username is: <b><%= user.username %></b> </p>
+          <% } else { %>
+            <p><b>user not found</b></p>
+          <% } %>
+        <%
+        } catch (e) {
+          console.error('Error: ', e);
+          %>
+            <p>Some error occurred</p>
+        <% } %>
+    </div>
   </body>
 </html>
