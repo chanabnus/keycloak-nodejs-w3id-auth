@@ -1,7 +1,7 @@
-FROM node:16
+FROM node:12-buster
 
 # Create app directory
-WORKDIR /usr/src/singlesignonapp
+WORKDIR /usr/src/app
 
 # Install app dependencies
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
@@ -15,5 +15,6 @@ RUN npm install
 # Bundle app source
 COPY . .
 
+USER 105014
 EXPOSE 5014
 CMD [ "node", "app.js" ]
