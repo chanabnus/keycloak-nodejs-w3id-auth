@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Keycloak Nodejs</title>
+  </head>
+  <body>
+    <div style="text-align: center">
+      <h1>Keycloak Nodejs w3id SSO Authentication</h1>
+      <h3><a href="/welcome">public page</a> (public access)</h3>
+      <h3><a href="/login">private page</a> (secured access)</h3>
+
+      <hr />
+      <p>
+        Autenticate Success! <br />
+        This is a Keycloak-secured page of your application. <br />
+        You shouldn't be able to see this unless you've autenticated with
+        Keycloak. <br />
+      </p>
+    </div>
+
+    <div>
+      <h3>Login Details:</h3>
+      <%
+        try {
+          if (user) {
+        %>
+            <p>Welcome <b><%= user.name %></b></p>
+            <p>Your email is: <b><%= user.email %></b> </p>
+            <p>Your username is: <b><%= user.username %></b> </p>
+          <% } else { %>
+            <p><b>user not found</b></p>
+          <% } %>
+        <%
+        } catch (e) {
+          console.error('Error: ', e);
+          %>
+            <p>Some error occurred</p>
+        <% } %>
+    </div>
+  </body>
+</html>
