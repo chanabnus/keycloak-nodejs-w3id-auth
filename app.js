@@ -20,8 +20,8 @@ const PORT = 5014;
 const samlConfig = {
     issuer: "w3id-auth-client",
     entityId: "https://sgar.sg.ibm.com:8443/auth/realms/keycloak-w3id-auth",
-    callbackUrl: "https://localhost:5014/login/callback",
-    signOut: "https://localhost:5014/signout/callback",
+    callbackUrl: "https://point.sg.ibm.com:5014/login/callback",
+    signOut: "https://point.sg.ibm.com:5014/signout/callback",
     entryPoint: "https://9.178.216.221:8443/auth/admin/keycloak-w3id-auth/console/",
 };
 
