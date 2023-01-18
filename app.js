@@ -95,41 +95,27 @@ app.use(passport.session({}));
 app.get('/', (req, res) => res.redirect('/welcome'));
 
 app.get('/welcome', (req, res, next) => {
+    console.log(`${new Date().toISOString()} [KEYCLOAK WELCOME] Welcome page`);
+        
     res.render('welcome');
-});
-
-app.get('/home', (req, res, next) => {
-    res.render('home');
 });
 
 // login route
 app.get('/login', (req, res, next) => {
-        console.log(`${new Date().toISOString()} [KEYCLOAK] Login Handler starts..`);
+        console.log(`${new Date().toISOString()} [KEYCLOAK LOGIN] Login Handler starts..`);
         next();
     },
-    passport.authenticate('samlStrategy'),
-    (req, res) => {
-
-        //SSO response payload
-        console.log(`${new Date().toISOString()} [KEYCLOAK] SSO login callback response payload: ${req.user.attributes}`);
-        res.send(req.user.attributes);
-    }
+    passport.authenticate('samlStrategy')
 );
 
-// ,(req, res) => {
-    //     // SSO response payload
-    //     const sso_payload = req.user.attributes;
-        
-    //     if(sso_payload) {
-    //         console.log(`${new Date().toISOString()} [KEYCLOAK] SSO login response payload: ${req.user.attributes}`);
-    //     }
-
-    //     // res.send(req.user.attributes);
-    //     res.render('home', {
-    //         // user: req.user.attributes
-    //     })
-    // }
-
+// home route
+app.get('/home', (req, res, next) => {
+        console.log(`${new Date().toISOString()} [KEYCLOAK HOME] Home Handler starts.. ${req.user.attributes}`);
+        res.send(req.user.attributes);
+        next();
+    },
+    passport.authenticate('samlStrategy')
+);
 
 // post login callback route
 app.post('/login/callback',
